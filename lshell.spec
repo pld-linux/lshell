@@ -1,12 +1,12 @@
 Summary:	Limited Shell (lshell)
 Summary(pl.UTF-8):	Limitowana Powłoka (lshell)
 Name:		lshell
-Version:	0.9.6
+Version:	0.9.7
 Release:	1
 License:	GPL v3
 Group:		Applications/Shells
-Source0:	http://dl.sourceforge.net/lshell/%{name}-%{version}.tar.gz
-# Source0-md5:	5084856f0172f180bee4dddc64c62209
+Source0:	http://downloads.sourceforge.net/lshell/%{name}-%{version}.tar.gz
+# Source0-md5:	a59a23cab71329bf0468956692ac90a8
 URL:		http://lshell.ghantoos.org
 BuildRequires:	python-devel
 BuildRequires:	rpm-pythonprov
@@ -67,5 +67,3 @@ fi
 %if "%{py_ver}" > "2.4"
 %{py_sitescriptdir}/%{name}-%{version}-py2.6.egg-info
 %endif
-%{py_sitescriptdir}/lshell.pyc
-%{py_sitescriptdir}/lshell.pyo
