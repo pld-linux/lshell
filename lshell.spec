@@ -67,3 +67,5 @@ fi
 %if "%{py_ver}" > "2.4"
 %{py_sitescriptdir}/%{name}-%{version}-py2.6.egg-info
 %endif
+%{py_sitescriptdir}/lshell.pyc
+%{py_sitescriptdir}/lshell.pyo
