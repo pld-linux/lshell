@@ -10,7 +10,7 @@ Source0:	http://downloads.sourceforge.net/lshell/%{name}-%{version}.tar.gz
 URL:		http://lshell.ghantoos.org
 BuildRequires:	python-devel
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	rpmbuild(macros) >= 1.462
 Requires:	python-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -41,21 +41,14 @@ rm -rf $RPM_BUILD_ROOT%{_docdir}/%{name}
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-umask 022
-[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} > /dev/null 2>&1
-if [ ! -f /etc/shells ]; then
-	echo "%{_bindir}/lshell" >> /etc/shells
-else
-	grep -q '^%{_bindir}/lshell$' /etc/shells || echo "%{_bindir}/lshell" >> /etc/shells
-fi
+%post	-p <lua>
+%lua_add_etc_shells %{_bindir}/lshell
+os.execute("/usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1")
 
-%preun
-if [ "$1" = "0" ]; then
-	umask 022
-	grep -v '^%{_bindir}/lshell$' /etc/shells > /etc/shells.new
-	mv -f /etc/shells.new /etc/shells
-fi
+%preun	-p <lua>
+if arg[2] == 0 then
+	%lua_remove_etc_shells %{_bindir}/lshell
+end
 
 %postun	-p	/sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
