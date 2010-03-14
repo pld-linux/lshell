@@ -36,6 +36,8 @@ rm -rf $RPM_BUILD_ROOT
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
 %py_postclean
 
+rm -rf $RPM_BUILD_ROOT%{_docdir}/%{name}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -61,11 +63,11 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc CHANGES README
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/lshell.conf
+%config(noreplace) %verify(not md5 mtime size) /etc/logrotate.d/lshell
 %attr(755,root,root) %{_bindir}/lshell
 %{_mandir}/man1/lshell.1*
+%{py_sitescriptdir}/lshell.py[co]
 %if "%{py_ver}" > "2.4"
-%{py_sitescriptdir}/%{name}-%{version}-py2.6.egg-info
+%{py_sitescriptdir}/%{name}-*.egg-info
 %endif
-%{py_sitescriptdir}/lshell.pyc
-%{py_sitescriptdir}/lshell.pyo
