@@ -2,7 +2,7 @@ Summary:	Limited Shell (lshell)
 Summary(pl.UTF-8):	Limitowana Powłoka (lshell)
 Name:		lshell
 Version:	0.9.12
-Release:	1
+Release:	2
 License:	GPL v3
 Group:		Applications/Shells
 Source0:	http://downloads.sourceforge.net/lshell/%{name}-%{version}.tar.gz
